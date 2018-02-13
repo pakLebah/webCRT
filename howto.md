@@ -272,7 +272,9 @@ begin
   WebReadln;
 end.
 ```
+
 Berikut tampilan contoh program 5 di atas di peramban Android:
+
 ![WebCRT output on mobile](https://github.com/git-bee/webCRT/blob/patch-1/webcrt_mobile_output.jpg)
 
 ## KESIMPULAN
