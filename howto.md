@@ -16,7 +16,7 @@ Unit WebCRT menghasilkan aplikasi web dengan antarmuka CGI. Pengguna unit ini di
 
 * Variabel `ResourcePath` bertipe data `string` untuk pengaturan lokasi *folder* tempat meletakkan berkas pendukung HTML, baik itu berkas CSS, Javascript, gambar, *font*, dan lain sebagainya. Nilai bawaan adalah `'res'`.
 
-* Variabel `SourcePath` bertipe data `string` untuk pengaturan lokasi *folder* tempat meletakkan berkas kode program (*source code*) program Pascal untuk ditampilkan. Unit WebCRT otomatis menampilkan tautan ke berkas kode program. Nilai bawaan adalah `'../pascal'` (sebuah *folder* bernama `pascal` satu tingkat di luar *folder* program berada).
+* Variabel `SourcePath` bertipe data `string` untuk pengaturan lokasi *folder* tempat meletakkan berkas kode program (*source code*) program Pascal untuk ditampilkan. Unit WebCRT otomatis menampilkan tautan ke berkas kode program. Nilai bawaan adalah `'../pascal'` (sebuah *folder* bernama `pascal` di luar *folder* program berada).
 
 * Variabel `IsWebInput` bertipe data `boolean` untuk mengetahui apakah program menerima masukan dari sisi-depan (*front-end*) atau peramban (*browser*) supaya bisa dikelola lebih lanjut. Ini untuk membedakan perilaku program berdasarkan ada atau tidaknya masukan.
 
@@ -300,6 +300,6 @@ begin
 end
 ```
 
-Untuk contoh program yg lebih rumit, misalnya penggunaan tabel dan daftar HTML, silakan pelajari program demo di [sini](https://pak.lebah.web.id/webdemo.cgi).
+Untuk contoh program yg lebih rumit, misalnya penggunaan tabel dan daftar HTML, silakan pelajari program demo yg bisa dicoba di [sini](https://pak.lebah.web.id/webdemo.cgi).
 
 **PERHATIAN:** Pastikan Anda mengunduh kode program WebCRT terbaru karena ada tambahan prosedur yg digunakan dalam contoh program di atas.
