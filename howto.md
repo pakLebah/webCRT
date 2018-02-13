@@ -30,7 +30,7 @@ Unit WebCRT menghasilkan aplikasi web dengan antarmuka CGI. Pengguna unit ini di
 
 * Prosedur `CloseHTML(submit)` untuk tanda penutup berkas HTML yg akan dikirim oleh program. Prosedur ini memiliki parameter `submit` bertipe data `boolean` untuk mengatur pemasangan tombol `SUBMIT` di akhir laman. Nilai bawaan parameter ini adalah `true` (ada tombol `SUBMIT`).
 
-* Prosedur `WebReadln()` untuk tanda penutup berkas HTML yg akan dikirim oleh program. Prosedur ini harus dipanggil *terakhir kali* dalam program. Jika tidak maka berkas HTML menjadi salah karena tidak lengkap. Prosedur ini adalah versi singkat dari prosedur `CloseHTML(submit)`.
+* Prosedur `WebReadln()` untuk tanda penutup berkas HTML yg akan dikirim oleh program. Prosedur ini harus dipanggil **terakhir kali** dalam program. Jika tidak maka berkas HTML menjadi salah karena tidak lengkap. Prosedur ini adalah versi singkat dari prosedur `CloseHTML(submit)`.
 
 Sebaiknya gunakan pasangan `Clrscr`–`WebReadln` jika ingin kode program yg sederhana dan klasik. Dan gunakan pasangan `OpenHTML`–`CloseHTML` jika ingin mengubah nilai bawaan parameter.
 
