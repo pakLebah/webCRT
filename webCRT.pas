@@ -83,6 +83,7 @@ procedure WebButtonAction(var clicked: boolean; const caption: string; const act
 // additional web output
 procedure WebWriteVar(const key, value: string); inline;
 procedure WebWriteBlock(const txt: string); inline;
+procedure WebWriteLine(const space: integer = 0; const width: integer = 50); inline;
 procedure WebPutGlyph(const gName: string; const caption: string = ''; const newLine: boolean = false); inline;
 function  WebGetGlyph(const gName: string; const caption: string = ''; const asTitle: boolean = false): string; inline;
 function  WebGetLink(const url: string; const caption: string = ''; const newPage: boolean = false): string; inline;
@@ -740,7 +741,7 @@ begin
   for i := 1 to j do
   begin
     // auto left align
-    if newLine and (LeftWidth > 0) and (i > 0) then 
+    if newLine and (LeftWidth > 0) and (i > 1) then 
       write('<span class="input" style="width:',LeftWidth,'px"> </span>');
     write('<label><input type="radio" id="rbInput_',InputCount,'" ');
     write('name="input_',InputCount,'" value="option_',i,'"');
@@ -859,6 +860,11 @@ end;
 procedure WebWriteBlock(const txt: string);
 begin
   writeln('<blockquote>',txt,'</blockquote>');
+end;
+
+procedure WebWriteLine(const space: integer = 0; const width: integer = 50);
+begin
+  writeln('<hr align="left" width="'+IntToStr(width)+'%" style="margin:10px 10px 10px '+IntToStr(space)+'px" />');
 end;
 
 // Support BootStrap's glyphicon library. Make sure the css and font are installed correctly.
