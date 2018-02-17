@@ -12,6 +12,9 @@ unit webCRT;
 # Release note:
   - v.1.0: - On 4 Sep 2016.
            - First public release, without any documentation.
+  - v.1.1: - On 14 Feb 2018.
+           - Added new webWriteLine() procedure.
+           - Some minor bug fixes.
 # Author:
   - Nickname : Mr. Bee Jay
   - Facebook : /pak.lebah
