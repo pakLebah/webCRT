@@ -1,7 +1,7 @@
 unit webCRT;
 
 (*****************************************************************************
-  webCRT unit - v.1.0
+  webCRT unit - v.1.1
   -------------------
 # Description: 
   This unit makes web development using Pascal becomes simple and easy. It's
@@ -12,8 +12,9 @@ unit webCRT;
 # Release note:
   - v.1.0: - On 4 Sep 2016.
            - First public release, without any documentation.
-  - v.1.1: - On 14 Feb 2018.
-           - Added new webWriteLine() procedure.
+  - v.1.1: - Updated on 14 Feb 2018.
+           - Added new WebWriteLine() procedure.
+           - Added new brief User Manual on GitHub.
            - Some minor bug fixes.
 # Author:
   - Nickname : Mr. Bee Jay
@@ -60,6 +61,7 @@ procedure WebWriteln(const bool: boolean); overload; inline;
 procedure WebRead(const newLine: boolean = false); overload; inline;
 procedure WebRead(var str: string; const newLine: boolean = false); overload; inline;
 procedure WebRead(var int: integer; const newLine: boolean = false); overload; inline;
+procedure WebRead(var int: word; const newLine: boolean = false); overload; inline;
 procedure WebRead(var int: int64; const newLine: boolean = false); overload; inline;
 procedure WebRead(var real: double; const newLine: boolean = false); overload; inline;
 procedure WebRead(var bool: boolean; const aLabel: string; const newLine: boolean = false); overload; inline;
@@ -68,6 +70,7 @@ procedure WebRead(var bool: boolean; const aLabel: string; const newLine: boolea
 procedure WebReadln; overload; inline;
 procedure WebReadln(var str: string); overload; inline;
 procedure WebReadln(var int: integer); overload; inline;
+procedure WebReadln(var int: word); overload; inline;
 procedure WebReadln(var int: int64); overload; inline;
 procedure WebReadln(var real: double); overload; inline;
 procedure WebReadln(var bool: boolean; const aLabel: string); overload; inline;
@@ -117,9 +120,9 @@ function HTMLDecode(const txt: string): string;
 function HTMLEncode(const txt: string): string;
 
 // convertion methods
-function Int2Str(const i: integer): string; inline;
-function Int2Str(const i: int64): string; inline;
-function Float2Str(const f: double): string; inline;
+function Int2Str(const i: integer; const w: integer = 0): string; inline;
+function Int2Str(const i: int64; const w: integer = 0): string; inline;
+function Float2Str(const f: double; const l: integer = 0; const d: integer = 0): string; inline;
 function Bool2Str(const b: boolean): string; inline;
 function Str2Int(const s: string): integer; inline;
 function Str2Int(const s: string): int64; inline;
@@ -135,6 +138,9 @@ function switch(const condition: boolean; const intTrue, intFalse: integer): int
 function switch(const condition: boolean; const intTrue, intFalse: int64): int64; inline;
 function switch(const condition: boolean; const realTrue, realFalse: double): double; inline;
 function switch(const condition: boolean; const boolTrue, boolFalse: boolean): boolean; inline;
+
+function getItemAt(const aText: string; const aIndex: integer; aDelim: string = ';'): string;
+function getItemCount(const aText: string; aDelim: string = ';'): integer;
 
 implementation
 
@@ -398,7 +404,7 @@ begin
   begin
     writeln('</p><hr/>');
     // submit button if there's any input element
-    if InputCount > 0 then write('<input type="submit" value=" SUBMIT "/>');
+    if InputCount > 0 then writeln('<input type="submit" value=" SUBMIT "/>');
     // custom user's footer
     if footer <> '' then writeln(footer);
     writeln('  <!-- end of user code --!>');
@@ -558,6 +564,40 @@ begin
   end;
 end;
 
+procedure WebRead(var int: word; const newLine: boolean = false);
+var
+  s: string;
+begin
+  s := readTextInput;
+  // set input to var
+  if getKey('input_'+Int2Str(InputCount),webInput) then 
+  begin
+    // valid input set var
+    if IsInt(s) then 
+    begin
+      int := Str2Int(s);
+      writeTextInput(s,newLine,false);
+    end
+    // invalid input reset to var
+    else 
+    begin
+      if s = '' then
+        writeTextInput(Int2Str(int),newLine,true)
+      else
+        writeTextInput('ERROR: Wrong input!',newLine,true);
+    end;
+  end
+  // set input from var
+  else
+  begin
+    // write default value
+    if int <> 0 then
+      writeTextInput(Int2Str(int),newLine,false)
+    else
+      writeTextInput('Type a number here...',newLine,true);
+  end;
+end;
+
 procedure WebRead(var int: int64; const newLine: boolean = false);
 var
   s: string;
@@ -640,6 +680,11 @@ begin
 end;
 
 procedure WebReadln(var int: integer);
+begin
+  WebRead(int,true);
+end;
+
+procedure WebReadln(var int: word);
 begin
   WebRead(int,true);
 end;
@@ -1144,20 +1189,19 @@ end;
 
 { // type conversion }
 
-function Int2Str(const i: integer): string;
+function Int2Str(const i: integer; const w: integer = 0): string;
 begin
-  Str(i,Result);
+  if w = 0 then Str(i,Result) else Str(i:w,Result);
 end;
 
-function Int2Str(const i: int64): string;
+function Int2Str(const i: int64; const w: integer = 0): string;
 begin
-  Str(i,Result);
+  if w = 0 then Str(i,Result) else Str(i:w,Result);
 end;
 
-function Float2Str(const f: double): string;
+function Float2Str(const f: double; const l: integer = 0; const d: integer = 0): string;
 begin
-  //Str(f:0:2,Result);
-  Result := FloatToStr(f);
+  if (l > 0) or (d > 0) then Str(f:l:d,Result) else Result := FloatToStr(f); // Str(f,Result);
 end;
 
 function Bool2Str(const b: boolean): string;
@@ -1182,12 +1226,10 @@ begin
 end;
 
 function Str2Float(const s: string): double;
-//var
-  //c: integer;
+var c: integer;
 begin
-  //Val(s,Result,c);
-  //if c <> 0 then Result := 0;
-  Result := StrToFloat(s);
+  Val(s,Result,c);
+  if c <> 0 then Result := 0;
 end;
 
 function Str2Bool(s: string): boolean;
