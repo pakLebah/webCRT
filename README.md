@@ -1,4 +1,4 @@
-# webCRT
+# webCRT unit
 A Pascal unit to make simple (CGI) web apps easy.
 
 Project announcement is [here](http://forum.lazarus-ide.org/index.php?topic=33946) (Lazarus forum).  
@@ -9,3 +9,5 @@ Demos are available at http://pak.lebah.web.id, for example:
 
 Here is a GIF showing how to write a simple web app using WebCRT unit on CodeAnywhere.
 ![](https://github.com/pakLebah/webCRT/blob/master/webcrt_on_ca.gif)
+
+Enjoy! 😊
