@@ -279,7 +279,7 @@ end.
 
 Berikut tampilan contoh program 5 di atas di peramban Android:
 
-![WebCRT output on mobile](https://github.com/git-bee/webCRT/blob/patch-1/webcrt_mobile_output.jpg)
+![WebCRT output](https://github.com/pakLebah/webCRT/blob/master/webcrt_output.jpg)
 
 ## KESIMPULAN
 
