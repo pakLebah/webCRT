@@ -6,3 +6,6 @@ Brief user manual is [here](https://github.com/pakLebah/webCRT/blob/master/howto
 
 Demos are available at http://pak.lebah.web.id, for example:    
 ```webdemo.pas``` is available at http://pak.lebah.web.id/webdemo.cgi
+
+Here is a GIF showing how to write a simple web app using WebCRT unit on CodeAnywhere.
+![](https://github.com/pakLebah/webCRT/blob/master/webcrt_on_ca.gif)
