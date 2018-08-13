@@ -3,10 +3,10 @@ unit webCRT;
 (*****************************************************************************
   webCRT unit - v.1.1
   -------------------
-# Description: 
+# Description:
   This unit makes web development using Pascal becomes simple and easy. It's
   almost like writing a console program, using writeln/readln. This unit is
-  especially targetted to Pascal newbies whom yet able to comprehend complex 
+  especially targetted to Pascal newbies whom yet able to comprehend complex
   web application system. But it's also suitable for any Pascal programmers
   to create simple web applications in quick and easy way.
 # Release note:
@@ -17,7 +17,7 @@ unit webCRT;
            - Added new brief User Manual on GitHub.
            - Some minor bug fixes.
 # Author:
-  - Nickname : Mr. Bee Jay
+  - Nickname : Mr. Bee aka Pak Lebah
   - Facebook : /pak.lebah
   - Twitter  : @pak_lebah
   - Tumblr   : paklebah
@@ -144,7 +144,7 @@ function getItemCount(const aText: string; aDelim: string = ';'): integer;
 
 implementation
 
-uses 
+uses
   Classes, SysUtils, StrUtils, DateUtils;
 
 // unit vars
@@ -169,22 +169,22 @@ begin
 
   i := 0; pa := 1;
   l := Length(aText);
-  while pa > 0 do 
+  while pa > 0 do
   begin
     i := i+1;
     pb := PosEx(aDelim,aText,pa); // found next delimiter after the last
     if pb = 0 then pb := l+1;     // no delimiter found at the end, include last char
     if pa = pb then pa := pa+1;   // found empty field, move to next char
-    
+
     if i = aIndex then
     begin
       Result := Copy(aText,pa,pb-pa); // read field value as is (including spaces)
-      if pb = l then Exit;            // a delimiter found at the end, stop it 
+      if pb = l then Exit;            // a delimiter found at the end, stop it
     end
     else
     begin
       pa := pb+1;                 // a delimiter found NOT at the index, get along
-      if pa >= l then pa := 0;    // iterator reaches the end of the text, stop it 
+      if pa >= l then pa := 0;    // iterator reaches the end of the text, stop it
     end;
   end;
 end;
@@ -197,15 +197,15 @@ begin
   Result := 0;
   if aDelim <> csvSplitter then aDelim := csvSplitter;
   if (aText = '') or (aDelim = '') then Exit;
-  
+
   i := 0; p := 0;
   l := Length(aText);
-  while p <= l do 
+  while p <= l do
   begin
-    i := i+1;                     // count delimiter found 
+    i := i+1;                     // count delimiter found
     p := PosEx(aDelim,aText,p+1); // search for delimiter along the text
-    if p = 0 then p := l+1;       // no delimiter found at the end, stop it 
-    if p = l then i := i-1;       // a delimiter found at the end, ignore it 
+    if p = 0 then p := l+1;       // no delimiter found at the end, stop it
+    if p = l then i := i-1;       // a delimiter found at the end, ignore it
   end;
   Result := i;
 end;
@@ -271,7 +271,7 @@ begin
   writeln('  <meta charset="UTF-8" lang="id">');
   writeln('  <meta name="viewport" content="width=device-width, initial-scale=1.0">');
   writeln('  <title>',ExeName,' - WebCRT</title>');
-  // default page element styling 
+  // default page element styling
   if customCSS = '' then
   begin
     writeln('  <style>');
@@ -332,9 +332,9 @@ begin
   // ready for page content
   writeln('</head><body>');
   write  ('  <b>&nbsp;');
-  if loadGlyphs then 
+  if loadGlyphs then
     write('&nbsp;<a href="',ExeName,'"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a>')
-  else 
+  else
     write('<a href="',ExeName,'"><big>⌂</big></a>');
   writeln('</b> │ ');
   if loadPrism then
@@ -356,7 +356,7 @@ begin
   write('<input type="text" id="edInput_',InputCount,'" name="input_',InputCount,'"');
   if not asHolder then
     write(' value="',value,'"')
-  else 
+  else
     write(' value="" placeholder="',value,'"');
   write('/>');
   if newline then writeln('<br/>') else writeln;
@@ -370,7 +370,7 @@ var
 begin
   // start time
   tStart := Now;
-  // read all web input  
+  // read all web input
   p := readWebInput(isPOST);
   g := readWebInput(not isPOST);
   if (p = '') and (g = '') then WebInput := '';
@@ -380,7 +380,7 @@ begin
   // mark if there is input
   isWebInput := (WebInput <> '');
   // view source code page
-  if getValue('src',WebInput) = '1' then 
+  if getValue('src',WebInput) = '1' then
   begin
     ViewSource(SourcePath,loadGlyphs);
     Halt;
@@ -420,7 +420,7 @@ begin
     writeln('  </form>');
   end;
   // credit footer
-  if credit then 
+  if credit then
   begin
     // stop time
     tStop := Now;
@@ -454,21 +454,21 @@ begin
   LeftWidth := width;
 end;
 
-procedure WebWrite(const int: integer; const width: integer = 0); 
+procedure WebWrite(const int: integer; const width: integer = 0);
 begin
   if width = 0 then write(int) else
     write('<span class="input" style="width:',width,'px">',int,'</span>');
   LeftWidth := width;
 end;
 
-procedure WebWrite(const int: int64; const width: integer = 0); 
+procedure WebWrite(const int: int64; const width: integer = 0);
 begin
   if width = 0 then write(int) else
     write('<span class="input" style="width:',width,'px">',int,'</span>');
   LeftWidth := width;
 end;
 
-procedure WebWrite(const real: double; const width: integer = 0); 
+procedure WebWrite(const real: double; const width: integer = 0);
 begin
   if width = 0 then write(real) else
     write('<span class="input" style="width:',width,'px">',real,'</span>');
@@ -502,7 +502,7 @@ begin
   writeln(int,'<br/>');
 end;
 
-procedure WebWriteln(const real: double); 
+procedure WebWriteln(const real: double);
 begin
   writeln(real,'<br/>');
 end;
@@ -536,16 +536,16 @@ var
 begin
   s := readTextInput;
   // set input to var
-  if getKey('input_'+Int2Str(InputCount),webInput) then 
+  if getKey('input_'+Int2Str(InputCount),webInput) then
   begin
     // valid input set var
-    if IsInt(s) then 
+    if IsInt(s) then
     begin
       int := Str2Int(s);
       writeTextInput(s,newLine,false);
     end
     // invalid input reset to var
-    else 
+    else
     begin
       if s = '' then
         writeTextInput(Int2Str(int),newLine,true)
@@ -570,16 +570,16 @@ var
 begin
   s := readTextInput;
   // set input to var
-  if getKey('input_'+Int2Str(InputCount),webInput) then 
+  if getKey('input_'+Int2Str(InputCount),webInput) then
   begin
     // valid input set var
-    if IsInt(s) then 
+    if IsInt(s) then
     begin
       int := Str2Int(s);
       writeTextInput(s,newLine,false);
     end
     // invalid input reset to var
-    else 
+    else
     begin
       if s = '' then
         writeTextInput(Int2Str(int),newLine,true)
@@ -603,9 +603,9 @@ var
   s: string;
 begin
   s := readTextInput;
-  if getKey('input_'+Int2Str(InputCount),webInput) then 
+  if getKey('input_'+Int2Str(InputCount),webInput) then
   begin
-    if IsInt(s) then 
+    if IsInt(s) then
     begin
       int := Str2Int(s);
       writeTextInput(s,newLine,false);
@@ -632,9 +632,9 @@ var
   s: string;
 begin
   s := readTextInput;
-  if getKey('input_'+Int2Str(InputCount),webInput) then 
+  if getKey('input_'+Int2Str(InputCount),webInput) then
   begin
-    if IsFloat(s) then 
+    if IsFloat(s) then
     begin
       real := Str2Float(s);
       writeTextInput(s,newLine,false);
@@ -743,29 +743,29 @@ begin
     p := Pos('_',s);
     if p > 0 then opt := Str2Int(Copy(s,p+1,Length(s)));
   end;
-  
+
   for i := 0 to High(labels) do
   begin
     // auto left align
-    if newLine and (LeftWidth > 0) and (i > 0) then 
+    if newLine and (LeftWidth > 0) and (i > 0) then
       write('<span class="input" style="width:',LeftWidth,'px"> </span>');
     write('<label><input type="radio" id="rbInput_',InputCount,'" ');
     write('name="input_',InputCount,'" value="option_',i+1,'"');
     // select option
-    if opt = i+1 then 
+    if opt = i+1 then
     begin
       Result := labels[opt-1];
       if Result = '' then Result := 'option_'+Int2Str(opt);
       write(' checked/>');
     end
-    else 
+    else
       write('/>');
     // write label
     write(' ',labels[i],' </label>');
     // option alignment
-    if newLine then 
+    if newLine then
       writeln('<br/>')
-    else 
+    else
     begin
       if i < High(labels) then writeln('&nbsp;│ ');
     end;
@@ -789,13 +789,13 @@ begin
   for i := 1 to j do
   begin
     // auto left align
-    if newLine and (LeftWidth > 0) and (i > 1) then 
+    if newLine and (LeftWidth > 0) and (i > 1) then
       write('<span class="input" style="width:',LeftWidth,'px"> </span>');
     write('<label><input type="radio" id="rbInput_',InputCount,'" ');
     write('name="input_',InputCount,'" value="option_',i,'"');
     // select option
     c := getItemAt(csvLabels,i);
-    if opt = i then 
+    if opt = i then
     begin
       Result := c;
       if Result = '' then Result := 'option_'+Int2Str(opt);
@@ -806,9 +806,9 @@ begin
     // write label
     write(' ',c,' </label>');
     // option alignment
-    if newLine then 
+    if newLine then
       writeln('<br/>')
-    else 
+    else
     begin
       if i < j then writeln('&nbsp;│ ');
     end;
@@ -834,7 +834,7 @@ begin
   begin
     write('<option value="item_',i+1,'"');
     // select item
-    if sel = i+1 then 
+    if sel = i+1 then
     begin
       Result := items[sel-1];
       if Result = '' then Result := 'item_'+Int2Str(sel);
@@ -866,7 +866,7 @@ begin
     write('<option value="item_',i,'"');
     c := getItemAt(csvItems,i);
     // select item
-    if sel = i then 
+    if sel = i then
     begin
       Result := c;
       if Result = '' then Result := 'item_'+Int2Str(sel);
@@ -924,7 +924,7 @@ end;
 
 function WebGetGlyph(const gName: string; const caption: string = ''; const asTitle: boolean = false): string;
 begin
-  if asTitle then 
+  if asTitle then
     Result := '<span class="glyphicon glyphicon-'+gName+'" aria-hidden="true" title="'+caption+'"></span>'
   else
     Result := '<span class="glyphicon glyphicon-'+gName+'" aria-hidden="true"></span>'+caption;
@@ -997,7 +997,7 @@ begin
   begin
     write('<tr>');
     for i := 0 to High(cells) do
-      if (cols > 0) and (i = High(cells)) then 
+      if (cols > 0) and (i = High(cells)) then
         write('<td colspan="',cols-High(cells),'">',cells[i],'</td>')
       else
         write('<td>',cells[i],'</td>');
@@ -1013,7 +1013,7 @@ begin
   begin
     write('<tr>');
     for i := 1 to getItemCount(csvCells) do
-      if (cols > 0) and (i = getItemCount(csvCells)) then 
+      if (cols > 0) and (i = getItemCount(csvCells)) then
         write('<td colspan="',cols-getItemCount(csvCells)+1,'">',getItemAt(csvCells,i),'</td>')
       else
         write('<td>',getItemAt(csvCells,i),'</td>');
@@ -1056,7 +1056,7 @@ var
   srcFile: TStringList;
 begin
   // if no source path is given, look at current directory
-  if srcPath = '' then 
+  if srcPath = '' then
     srcPath := ChangeFileExt(ParamStr(0),'.pas')
   else
     srcPath := srcPath+'/'+ChangeFileExt(ExtractFileName(ParamStr(0)),'.pas');
@@ -1078,7 +1078,7 @@ begin
     writeln('Courtesy of <a href="/" target=_blank>pak.lebah.web.id</a>.<br/>');
     write  ('This page is served in ',MilliSecondSpan(tStart,tStop):0:0,' ms by ');
     writeln('<a href="http://freepascal.org" target=_blank>Free Pascal</a>.</small></i>');
-  end 
+  end
   // source file is not found
   else
     writeln('ERROR: Source file is not found.');
@@ -1109,7 +1109,7 @@ begin
               Inc(s);
               if (s-ss) < l then
               begin
-                if s^ = '%' then 
+                if s^ = '%' then
                   r^ := '%'
                 else
                 begin
@@ -1136,7 +1136,7 @@ end;
 
 function HTTPEncode(const txt: string): string;
 const
-  HTTPAllowed = 
+  HTTPAllowed =
   ['A'..'Z','a'..'z','*','@','.','_','-','0'..'9','$','!','''','(',')'];
 var
   s,ss,r: PChar;
@@ -1148,7 +1148,7 @@ begin
   if l = 0 then Exit;
   r := PChar(Result);
   s := PChar(txt);
-  ss := s; 
+  ss := s;
   while (s-ss) < l do
   begin
     if s^ in HTTPAllowed then
