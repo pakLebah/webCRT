@@ -340,7 +340,7 @@ begin
   if loadPrism then
     writeln('  <a href="',ExeName,'">',ExeName,'</a><hr/>')
   else
-    writeln('  <a href="',ExeName,'?src=1">',ChangeFileExt(ExeName,'.pas'),'</a><hr/>');
+    writeln('  <a href="',ExeName,'?code=1">',ChangeFileExt(ExeName,'.pas'),'</a><hr/>');
 end;
 
 // read value from web vars
@@ -380,7 +380,7 @@ begin
   // mark if there is input
   isWebInput := (WebInput <> '');
   // view source code page
-  if getValue('src',WebInput) = '1' then
+  if getValue('code',WebInput) = '1' then
   begin
     ViewSource(SourcePath,loadGlyphs);
     Halt;
